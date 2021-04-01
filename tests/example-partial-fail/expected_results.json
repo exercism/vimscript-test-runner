@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "status": "fail",
+  "output": "Starting Vader: 1 suite(s), 5 case(s)\n  Starting Vader: /solution/example_partial_fail.vader\n\u001b[01;32m\u001b[K    (1/5) [EXECUTE] year not divisible by 4: common year\u001b[m\u001b[K\n\u001b[01;32m\u001b[K    (2/5) [EXECUTE] year divisible by 4, not divisible by 100: leap year\u001b[m\u001b[K\n\u001b[01;32m\u001b[K    (3/5) [EXECUTE] year divisible by 100, not divisible by 400: common year\u001b[m\u001b[K\n\u001b[01;32m\u001b[K    (4/5) [EXECUTE] year divisible by 400: leap year\u001b[m\u001b[K\n\u001b[01;32m\u001b[K\u001b[01;31m\u001b[K    (4/5) [EXECUTE] (X) 0 should be equal to 1\u001b[m\u001b[K\u001b[m\u001b[K\n\u001b[01;32m\u001b[K    (5/5) [EXECUTE] year divisible by 200, not divisible by 400: common year\u001b[m\u001b[K\n  Success/Total: 4/5\nSuccess/Total: 4/5 (assertions: 4/5)\n\n\u001b[?2004h\u001b[?1049h\u001b[22;0;0t\u001b[?1h\u001b=\u001b[?2004h\u001b[24;1H\u001b[?2004l\u001b[?2004h\u001b[?2004l\u001b[23;2t\u001b[23;1t\u001b[22;2t\u001b[22;1t\u001b[23;2t\u001b[23;1t\u001b[?2004l\u001b[?1l\u001b>\u001b[?1049l\u001b[23;0;0t"
+}
