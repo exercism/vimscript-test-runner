@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "status": "fail",
+  "output": "Vim:E492: Not an editor command: FUNCTIONNNNN @#@#!\u001b[?25l\u001b[J\u001b[24;1H\u001b[23;2t\u001b[23;1t\u001b[22;2t\u001b[22;1t\u001b[23;2t\u001b[23;1t\r\u001b[?25h"
+}
