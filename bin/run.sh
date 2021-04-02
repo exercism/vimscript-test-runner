@@ -36,26 +36,15 @@ echo "${slug}: testing..."
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
-test_output=$(TERM=xterm HOME=/dev/null vim -XNu .vimrc -i NONE -c "Vader! ${tests_file}" 2>&1)
-exit_code=$?
-
-if [[ "${test_output}" == *"[EXECUTE] (X)"* ]]; then
-    test_failed=1
-else
-    test_failed=0
-fi
+test_output=$(TERM=xterm HOME=/dev/null vim -XNu .vimrc -i NONE -c ":so $implementation_file" -c "Vader! ${tests_file}" 2>&1)
 
 # Write the results.json file based on the exit code of the command that was 
 # just executed that tested the implementation file
-if [ $exit_code -eq 0 ] && [ $test_failed -eq 0 ]; then
+if [ $? -eq 0 ] && [ "${test_output}" != "[EXECUTE] (X)" ]; then
     jq -n '{version: 1, status: "pass"}' > ${results_file}
 else
     # Strip off the logging information
-    if [ $test_failed -eq 1 ]; then
-        sanitized_test_output=$(printf "${test_output}" | sed -n '/Starting Vader/,$p')
-    else
-        sanitized_test_output=$(printf "${test_output}" | sed -E -e 's/^Vim: Warning: .*$//' | tr -d '\n')
-    fi
+    sanitized_test_output=$(printf "${test_output}" | sed -n '/Starting Vader/,$p')
 
     # Manually add colors to the output to help scanning the output for errors
     colorized_test_output=$(echo "${sanitized_test_output}" \
