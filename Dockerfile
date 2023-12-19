@@ -1,10 +1,7 @@
-FROM python:3.7-slim
+FROM python:3.12-alpine
 
-RUN apt-get update && \
-    apt-get install -y git jq vim-gtk && \
-    apt-get purge --auto-remove && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache git bash jq vim && \
+    rm -rf /var/cache/apk/*
 
 RUN git clone https://github.com/junegunn/vader.vim.git /opt/test-runner/vader.vim
 
