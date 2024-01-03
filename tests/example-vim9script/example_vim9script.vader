@@ -1,0 +1,3 @@
+Execute (returns true):
+  let expected = 2
+  AssertEqual expected, ReturnsTwo()
