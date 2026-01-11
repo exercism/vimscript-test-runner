@@ -1,4 +1,4 @@
-FROM alpine:3.19.0
+FROM alpine:3.23.2
 
 RUN apk add --no-cache git bash jq vim && \
     rm -rf /var/cache/apk/*
