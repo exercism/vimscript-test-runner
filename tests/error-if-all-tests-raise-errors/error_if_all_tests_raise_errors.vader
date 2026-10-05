@@ -1,0 +1,5 @@
+Execute (first error):
+  call MissingFunctionOne()
+
+Execute (second error):
+  call MissingFunctionTwo()

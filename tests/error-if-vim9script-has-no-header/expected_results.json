@@ -1,0 +1,6 @@
+{
+  "status": "error",
+  "version": 2,
+  "tests": [],
+  "message": "Vim(var):E1124: \":var\" cannot be used in legacy Vim script"
+}
