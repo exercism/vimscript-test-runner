@@ -1,8 +1,5 @@
-.github/
-tests/
-.appends
-.git
-.gitignore
-.gitattributes
-.dockerignore
-Dockerfile
+*
+!bin/
+!bin/**
+!lib/
+!lib/**
