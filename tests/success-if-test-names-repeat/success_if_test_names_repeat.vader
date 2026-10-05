@@ -1,0 +1,5 @@
+Execute (duplicate name):
+  AssertEqual 2, Identity(2)
+
+Execute (duplicate name):
+  AssertEqual 1, Identity(1)

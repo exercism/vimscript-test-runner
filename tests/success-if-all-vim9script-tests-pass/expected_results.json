@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "version": 2,
+  "tests": [
+    {
+      "status": "pass",
+      "name": "returns 1",
+      "test_code": "AssertEqual 1, Identity(1)"
+    },
+    {
+      "status": "pass",
+      "name": "returns 2",
+      "test_code": "AssertEqual 2, Identity(2)"
+    }
+  ],
+  "message": null
+}
