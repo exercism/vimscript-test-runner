@@ -19,15 +19,22 @@ for test_dir in tests/*; do
     test_dir_path=$(realpath "${test_dir}")
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
+    formatted_results_file_path="${results_file_path}.formatted"
+    formatted_expected_results_file_path="${expected_results_file_path}.formatted"
 
     bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
 
+    jq -S . "${results_file_path}" > "${formatted_results_file_path}"
+    jq -S . "${expected_results_file_path}" > "${formatted_expected_results_file_path}"
+
     echo "${test_dir_name}: comparing results.json to expected_results.json"
-    diff "${results_file_path}" "${expected_results_file_path}"
+    diff "${formatted_results_file_path}" "${formatted_expected_results_file_path}"
 
     if [ $? -ne 0 ]; then
         exit_code=1
     fi
+
+    rm -f "${formatted_results_file_path}" "${formatted_expected_results_file_path}"
 done
 
 exit ${exit_code}
