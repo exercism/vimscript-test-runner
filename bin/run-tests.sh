@@ -12,15 +12,16 @@
 # ./bin/run-tests.sh
 
 exit_code=0
+temp_dir=$(mktemp -d) || exit 1
+trap 'rm -rf "${temp_dir}"' EXIT
 
-# Iterate over all test directories
-for test_dir in tests/*; do
-    test_dir_name=$(basename "${test_dir}")
-    test_dir_path=$(realpath "${test_dir}")
+run_test() {
+    test_dir_name=$(basename "${1}")
+    test_dir_path=$(realpath "${1}")
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
-    formatted_results_file_path="${results_file_path}.formatted"
-    formatted_expected_results_file_path="${expected_results_file_path}.formatted"
+    formatted_results_file_path="${temp_dir}/${test_dir_name}-results.json"
+    formatted_expected_results_file_path="${temp_dir}/${test_dir_name}-expected-results.json"
 
     bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
 
@@ -29,12 +30,14 @@ for test_dir in tests/*; do
 
     echo "${test_dir_name}: comparing results.json to expected_results.json"
     diff "${formatted_results_file_path}" "${formatted_expected_results_file_path}"
+}
+
+for test_dir in tests/*; do
+    run_test "${test_dir}"
 
     if [ $? -ne 0 ]; then
         exit_code=1
     fi
-
-    rm -f "${formatted_results_file_path}" "${formatted_expected_results_file_path}"
 done
 
 exit ${exit_code}
