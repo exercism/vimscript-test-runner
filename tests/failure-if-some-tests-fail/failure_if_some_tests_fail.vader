@@ -1,0 +1,5 @@
+Execute (fails):
+  AssertEqual 2, Identity(1)
+
+Execute (passes):
+  AssertEqual 2, Identity(2)

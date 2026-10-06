@@ -1,0 +1,5 @@
+Execute (unexpected error):
+  call MissingFunction()
+
+Execute (returns 2):
+  AssertEqual 2, Identity(2)
