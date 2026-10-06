@@ -3,10 +3,7 @@ FROM alpine:3.23.5@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952
 ARG VADER_REV=429b669e6158be3a9fc110799607c232e6ed8e29
 
 RUN apk add --no-cache bash git jq vim \
-    && git init /opt/vader.vim \
-    && git -C /opt/vader.vim remote add origin https://github.com/junegunn/vader.vim.git \
-    && git -C /opt/vader.vim fetch --depth 1 origin "$VADER_REV" \
-    && git -C /opt/vader.vim checkout --detach FETCH_HEAD \
+    && git clone --revision="$VADER_REV" --depth=1 https://github.com/junegunn/vader.vim.git /opt/vader.vim \
     && rm -rf /opt/vader.vim/.git
 
 COPY . /opt/test-runner
