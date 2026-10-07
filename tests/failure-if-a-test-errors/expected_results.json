@@ -1,0 +1,18 @@
+{
+  "status": "fail",
+  "version": 2,
+  "tests": [
+    {
+      "status": "error",
+      "name": "unexpected error",
+      "message": "Vim(call):E117: Unknown function: MissingFunction",
+      "test_code": "call MissingFunction()"
+    },
+    {
+      "status": "pass",
+      "name": "returns 2",
+      "test_code": "AssertEqual 2, Identity(2)"
+    }
+  ],
+  "message": null
+}

@@ -12,25 +12,28 @@
 # ./bin/run-tests.sh
 
 exit_code=0
+temp_dir=$(mktemp -d) || exit 1
+trap 'rm -rf "${temp_dir}"' EXIT
 
-# Iterate over all test directories
-for test_dir in tests/*; do
-    test_dir_name=$(basename "${test_dir}")
-    test_dir_path=$(realpath "${test_dir}")
+run_test() {
+    test_dir_name=$(basename "${1}")
+    test_dir_path=$(realpath "${1}")
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
+    formatted_results_file_path="${temp_dir}/${test_dir_name}-results.json"
+    formatted_expected_results_file_path="${temp_dir}/${test_dir_name}-expected-results.json"
 
     bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
 
-    # Normalize the results file
-    sed -i -E \
-        -e 's/Elapsed time: [0-9]+\.[0-9]+ sec\.//' \
-        -e 's~/tmp/[^/]+/[^,]+,\s*~~g' \
-        -e "s~${test_dir_path}~/solution~g" \
-        "${results_file_path}"
+    jq -S . "${results_file_path}" > "${formatted_results_file_path}"
+    jq -S . "${expected_results_file_path}" > "${formatted_expected_results_file_path}"
 
     echo "${test_dir_name}: comparing results.json to expected_results.json"
-    diff "${results_file_path}" "${expected_results_file_path}"
+    diff "${formatted_results_file_path}" "${formatted_expected_results_file_path}"
+}
+
+for test_dir in tests/*; do
+    run_test "${test_dir}"
 
     if [ $? -ne 0 ]; then
         exit_code=1

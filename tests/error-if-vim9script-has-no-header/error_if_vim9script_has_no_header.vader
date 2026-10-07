@@ -1,0 +1,2 @@
+Execute (returns a value):
+  AssertEqual 1, answer

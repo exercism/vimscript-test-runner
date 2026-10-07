@@ -1,0 +1,5 @@
+Execute (returns 1):
+  AssertEqual 1, Identity(1)
+
+Execute (returns 2):
+  AssertEqual 2, Identity(2)
